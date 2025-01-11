@@ -2,3 +2,9 @@
 *.png
 *.html
 credentials.toml
+*.py[co]
+__pycache__/
+html/
+responses/
+json/
+structured_output_*/

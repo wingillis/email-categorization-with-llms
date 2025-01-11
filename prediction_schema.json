@@ -1,0 +1,47 @@
+{
+  "$defs": {
+    "Labels": {
+      "description": "Enumeration of possible pre-defined email labels.",
+      "enum": [
+        "Personal or professional correspondence",
+        "Financial information",
+        "Medical information",
+        "Programming, educational, and technical information",
+        "News alerts and newsletters",
+        "Travel, scheduling and calendar events",
+        "Shopping and order confirmations",
+        "Other",
+        "Promotional emails (marketing, sales, advertisements)",
+        "Customer service and support",
+        "Account security and privacy"
+      ],
+      "title": "Labels",
+      "type": "string"
+    }
+  },
+  "description": "Correctly identified class labels and alternative label of the given email.",
+  "properties": {
+    "class_label": {
+      "$ref": "#/$defs/Labels"
+    },
+    "alternative_label": {
+      "description": "1-3 word alternative categorical label",
+      "pattern": "^[a-z]+( [a-z]+){0,2}$",
+      "title": "Alternative Label",
+      "type": "string"
+    },
+    "subject_suggestion": {
+      "description": "1 word subject suggestion",
+      "pattern": "^[a-z]+$",
+      "title": "Subject Suggestion",
+      "type": "string"
+    }
+  },
+  "required": [
+    "class_label",
+    "alternative_label",
+    "subject_suggestion"
+  ],
+  "title": "Prediction",
+  "type": "object"
+}
