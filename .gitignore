@@ -1,0 +1,4 @@
+*.parquet
+*.png
+*.html
+credentials.toml
