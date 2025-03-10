@@ -52,6 +52,16 @@ MODEL_DICT = {
     "mistral-small": "Mistral-small-3",
     "smollm2": "SmolLM-2-1.7b",
     "smollm2-360m": "SmolLM-2-360m",
+    "llama3_2-1b": "Llama-3.2-1b",
+    "granite3_2-dense-2b": "Granite-3.2-2b",
+    "granite3_2-dense-8b": "Granite-3.2-8b",
+    "tulu3_1": "Tulu-3.1",
+    "mistral-7b": "Mistral-7b",
+    "phi4-mini": "Phi-4-mini",
+    "gemma3-1b": "Gemma-3-1b",
+    "gemma3-4b": "Gemma-3-4b",
+    "gemma3-12b": "Gemma-3-12b",
+    "gemma3-27b": "Gemma-3-27b",
 }
 
 

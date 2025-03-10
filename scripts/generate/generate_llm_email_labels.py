@@ -16,47 +16,52 @@ from typing import Annotated, Iterable
 
 
 MODELS = {
-    "smollm2": "smollm2",
+    "smollm2": "smollm2:latest",
     "smollm2-360m": "smollm2:360m",
     "granite3_1-dense-2b": "granite3.1-dense:2b",
     "falcon3_3b": "falcon3:3b",
     "qwen-1_5b": "qwen2.5:1.5b-instruct-q8_0",
     "llama3_2": "llama3.2:3b-instruct-q8_0",
-    "granite3_1-dense-8b": "granite3.1-dense",
+    "granite3_1-dense-8b": "granite3.1-dense:latest",
     "granite3_2-dense-2b": "granite3.2:2b-instruct-q8_0",
     "granite3_2-dense-8b": "granite3.2:8b",
     "llama3_2-1b": "llama3.2:1b",
-    "tulu3": "tulu3",
+    "tulu3": "tulu3:latest",
     "tulu3_1": "hf.co/bartowski/allenai_Llama-3.1-Tulu-3.1-8B-GGUF:Q6_K",
     "llama3_1": "llama3.1:8b-instruct-q4_K_M",
     "qwen-3b": "qwen2.5:3b",
     "qwen-7b": "qwen2.5:7b",
-    "falcon3_7b": "falcon3",
-    "smallthinker": "smallthinker",
-    "dolphin3": "dolphin3",
-    "marco-o1": "marco-o1",
+    "falcon3_7b": "falcon3:latest",
+    "smallthinker": "smallthinker:latest",
+    "dolphin3": "dolphin3:latest",
+    "marco-o1": "marco-o1:latest",
     "nemo": "mistral-nemo:12b-instruct-2407-q4_K_M",
-    "command-r7b": "command-r7b",
+    "command-r7b": "command-r7b:latest",
     "internlm3": "lly/InternLM3-8B-Instruct:8b-instruct-q4_k_m",
     "deepseek-r1_8b": "deepseek-r1:8b",
     "deepseek-r1_7b": "deepseek-r1:7b",
     "deepseek-r1_1.5b": "deepseek-r1:1.5b",
     "qwen-0_5b": "qwen2.5:0.5b-instruct-q8_0",
     "phi4-mini": "phi4-mini:3.8b-q8_0",
+    "mistral-7b": "mistral:7b",
     "granite3_1-moe-1b": "granite3.1-moe:1b",  # oddly slow
-    "phi4": "phi4",
-    "qwq": "qwq",
+    "phi4": "phi4:latest",
+    "qwq": "qwq:latest",
     "qwen-32b": "qwen2.5:32b-instruct-q3_K_M",
-    "gemma2": "gemma2",
-    "granite3_1-moe-3b": "granite3.1-moe",  # too slow - 4sec per email
-    "olmo2": "olmo2",  # slow
-    "mistral-small": "mistral-small",
+    "gemma2": "gemma2:latest",
+    "granite3_1-moe-3b": "granite3.1-moe:latest",  # too slow - 4sec per email
+    "olmo2": "olmo2:latest",  # slow
+    "mistral-small": "mistral-small:latest",
     "llama3.3": "llama3.3:70b-instruct-q3_K_M",
+    "gemma3-1b": "gemma3:1b",
+    "gemma3-4b": "gemma3:4b",
+    "gemma3-12b": "gemma3:12b",
+    "gemma3-27b": "gemma3:27b",
 }
 
 
 class Config(BaseModel):
-    chunk_size: int = 10
+    chunk_size: int = 100
     full_dataset: bool = False
     """Flag that determines whether to use the full email dataset or the supervised subset."""
     select_models: tuple[str, ...] = tuple(MODELS)
@@ -296,10 +301,12 @@ def run_predictions(dataset: pl.DataFrame, config: Config):
 
             # check to see if model_choice is within
             if not any(map(lambda x: x.model == ollama_name, response.models)):
+                client = Client(timeout=None, )
                 print(
-                    f"Model {ollama_name} not found. Downloading...(this may take a while)"
+                    f"\nModel {ollama_name} not found. Downloading...(this may take a while)"
                 )
                 client.pull(ollama_name)
+                client = Client(timeout=120)
 
             process_with_model = partial(
                 process_email, model_choice=ollama_name, temperature=0, client=client

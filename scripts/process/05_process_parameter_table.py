@@ -23,6 +23,7 @@ def main():
     merged = df.join(metrics_df, on="model", how="right")
     merged.write_parquet("merged_metrics.parquet")
     print("Merged with metrics dataframe - overwriting")
+    print("New dataframe shape:", merged.shape)
 
 
 if __name__ == "__main__":

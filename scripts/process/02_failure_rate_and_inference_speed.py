@@ -3,7 +3,7 @@ from pathlib import Path
 
 
 def main():
-    files = list(Path(".").glob("structured_output/*.parquet"))
+    files = list(Path(".").glob("structured_output*/*.parquet"))
 
     processed_dfs = []
     for file in files:

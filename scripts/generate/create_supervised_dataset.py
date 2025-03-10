@@ -6,7 +6,7 @@ import re
 import polars as pl
 from pathlib import Path
 from bs4 import BeautifulSoup
-from email_struct_output import Labels
+from generate_llm_email_labels import Labels
 from textual.app import App, ComposeResult
 from textual.widgets import Header, Footer, Button, Static
 from textual.containers import Horizontal, VerticalScroll, Vertical

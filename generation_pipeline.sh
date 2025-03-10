@@ -19,3 +19,6 @@ uv run python scripts/generate/generate_consistency_data.py
 
 # hand-label some data
 uv run python scripts/generate/create_supervised_dataset.py
+
+# run classifiers
+uv run python scripts/generate/gridsearch_classifier_params.py

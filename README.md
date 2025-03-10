@@ -9,12 +9,12 @@ Make sure ollama is installed separately.
 Python code for this project can be installed with `uv`:
 
 ```bash
-cd clean-email
-# creates a .venv with packages from uv.lock
+cd email-categorization-with-llms
+# creates a .venv with packages from uv.lock and pyproject.toml
 uv sync
 ```
 
-The email dataframe generate code requires a `.toml` file with your IMAP credentials:
+The email dataframe generation code requires a `credentials.toml` file with your IMAP credentials:
 ```toml
 email = "your-email@email.com"
 password = "imap-password"
