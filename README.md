@@ -1,6 +1,6 @@
 # Email Categorization project
 
-This is the code that goes with the companion blog post XXX.
+This is the code that goes with the [companion blog post](https://wingillis.github.io/posts/2025-02-17-email-categorization/).
 
 ## Setup
 
